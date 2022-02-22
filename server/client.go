@@ -54,5 +54,11 @@ func (c *Client) handleCommand(command string) {
 	switch command {
 	case "ping":
 		c.send("pong")
+	default:
+		if c.match != nil {
+			c.match.handleCommand(c, command)
+		} else {
+			fmt.Printf("Client %s sent an invalid command: %s", c.ip, command)
+		}
 	}
 }

@@ -31,7 +31,7 @@ func (s *Server) Listen(port int) {
 		if err != nil {
 			break
 		}
-		client := NewClient(server, con)
+		client := NewClient(s, con)
 		go client.handleConnection()
 
 		if s.waitingClient != nil {
@@ -39,10 +39,9 @@ func (s *Server) Listen(port int) {
 				s.waitingClient = nil
 			} else {
 				match := NewMatch(s.waitingClient, client)
-				if match != nil {
-					s.matches = append(s.matches)
-					s.waitingClient = nil
-				}
+				s.matches = append(s.matches)
+				s.waitingClient = nil
+				match.begin()
 			}
 		} else {
 			s.waitingClient = client
