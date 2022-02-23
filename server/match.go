@@ -165,6 +165,15 @@ func (m *Match) complete(state cellState, indices string) {
 	}
 }
 
+func (m *Match) disconnect(client *Client) {
+	if client == m.clientCross {
+		m.clientCircle.send("opponent-disconnected")
+	} else {
+		m.clientCross.send("opponent-disconnected")
+	}
+	m.terminate()
+}
+
 func (m *Match) terminate() {
 	panic("TODO")
 }
@@ -187,7 +196,7 @@ func (m *Match) send(text string) error {
 
 	err = m.clientCircle.send(text)
 	if err != nil {
-		m.clientCircle.send("opponent-disconnected")
+		m.clientCross.send("opponent-disconnected")
 		m.terminate()
 		return err
 	}

@@ -38,6 +38,10 @@ func (c *Client) handleConnection() {
 		fmt.Printf("Received '%s' from %s.\n", text, c.con.RemoteAddr())
 		c.handleCommand(text)
 	}
+
+	if c.match != nil {
+		c.match.disconnect(c)
+	}
 }
 
 func (c *Client) send(text string) error {
