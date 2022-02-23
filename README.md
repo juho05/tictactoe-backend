@@ -1,4 +1,4 @@
-# tictactoe-backend
+# TicTacToe multiplayer server
 
 ![License](https://img.shields.io/github/license/Bananenpro/tictactoe-backend)
 ![Go version](https://img.shields.io/github/go-mod/go-version/Bananenpro/tictactoe-backend)
