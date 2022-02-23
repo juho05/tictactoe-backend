@@ -8,7 +8,7 @@ A simple TicTacToe multiplayer server.
 ## Features
 
 - Unlimited 1v1 matches in parallel
-- Winner detection
+- Winner/tie detection
 - Disconnect handling
 
 ## Clients
