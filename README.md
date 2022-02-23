@@ -15,6 +15,31 @@ A simple TicTacToe multiplayer server.
 
 - [tictactoe-cli](https://github.com/Bananenpro/tictactoe-cli)
 
+## Setup
+
+### Prerequisites
+
+- [Go](https://go.dev/) 1.17+
+
+### Cloning the repo
+
+```sh
+git clone https://github.com/Bananenpro/tictactoe-backend.git
+cd tictactoe-backend
+```
+
+### Building
+
+```sh
+go build -o tictactoe-backend ./cmd/main.go
+```
+
+### Running
+
+```sh
+./tictactoe-backend
+```
+
 ## License
 
 This program is free software: you can redistribute it and/or modify
