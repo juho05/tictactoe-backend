@@ -27,14 +27,18 @@ type Match struct {
 	currentPlayerId string
 
 	board board
+
+	server *Server
 }
 
-func NewMatch(clientCross, clientCircle *Client) *Match {
+func (s *Server) NewMatch(clientCross, clientCircle *Client) *Match {
 	match := &Match{
 		clientCross:  clientCross,
 		clientCircle: clientCircle,
 
 		currentPlayerId: clientCross.id,
+
+		server: s,
 	}
 
 	clientCross.match = match
@@ -175,7 +179,11 @@ func (m *Match) disconnect(client *Client) {
 }
 
 func (m *Match) terminate() {
-	panic("TODO")
+	m.server.RemoveMatch(m)
+	m.clientCross.match = nil
+	m.clientCircle.match = nil
+	m.clientCross.con.Close()
+	m.clientCircle.con.Close()
 }
 
 func (m *Match) sendBoard() error {
