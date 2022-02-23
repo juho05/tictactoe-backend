@@ -105,7 +105,7 @@ func (m *Match) handleCommand(client *Client, command string) {
 			m.board[index] = cellCircle
 		}
 
-		if !m.checkWon() {
+		if !m.checkComplete() {
 			m.switchTurns()
 		}
 	}
@@ -128,7 +128,7 @@ func (m *Match) switchTurns() {
 	}
 }
 
-func (m *Match) checkWon() bool {
+func (m *Match) checkComplete() bool {
 	for i := 0; i < 3; i++ {
 		// top to bottom
 		if m.board[0+i] != cellEmpty && m.board[0+i] == m.board[3+i] && m.board[0+i] == m.board[6+i] {
@@ -152,6 +152,22 @@ func (m *Match) checkWon() bool {
 	// top right to bottom left
 	if m.board[2] != cellEmpty && m.board[2] == m.board[4] && m.board[2] == m.board[6] {
 		m.complete(m.board[2], fmt.Sprintf("%d%d%d", 2, 4, 6))
+		return true
+	}
+
+	// tie
+	tie := true
+	for _, cell := range m.board {
+		if cell == cellEmpty {
+			tie = false
+			break
+		}
+	}
+
+	if tie {
+		m.sendBoard()
+		m.clientCross.send("tie")
+		m.clientCircle.send("tie")
 		return true
 	}
 
