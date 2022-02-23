@@ -62,7 +62,7 @@ func (c *Client) handleCommand(command string) {
 		if c.match != nil {
 			c.match.handleCommand(c, command)
 		} else {
-			fmt.Printf("Client %s sent an invalid command: %s", c.ip, command)
+			fmt.Printf("Client %s sent an invalid command: %s\n", c.ip, command)
 		}
 	}
 }
