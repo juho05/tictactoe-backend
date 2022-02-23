@@ -62,6 +62,12 @@ func (m *Match) begin() {
 		return
 	}
 
+	err = m.clientCircle.send("their-turn")
+	if err != nil {
+		m.terminate()
+		return
+	}
+
 	fmt.Println("Started new match:", m.clientCross.ip, "+", m.clientCircle.ip)
 }
 
@@ -110,9 +116,11 @@ func (m *Match) switchTurns() {
 	if m.currentPlayerId == m.clientCross.id {
 		m.currentPlayerId = m.clientCircle.id
 		m.clientCircle.send("your-turn")
+		m.clientCross.send("their-turn")
 	} else {
 		m.currentPlayerId = m.clientCross.id
 		m.clientCross.send("your-turn")
+		m.clientCircle.send("their-turn")
 	}
 }
 
