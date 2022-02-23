@@ -125,8 +125,43 @@ func (m *Match) switchTurns() {
 }
 
 func (m *Match) checkWon() bool {
-	fmt.Println("Match.checkWon(): TODO")
+	for i := 0; i < 3; i++ {
+		// top to bottom
+		if m.board[0+i] != cellEmpty && m.board[0+i] == m.board[3+i] && m.board[0+i] == m.board[6+i] {
+			m.complete(m.board[0+1], fmt.Sprintf("%d%d%d", 0+i, 3+i, 6+i))
+			return true
+		}
+
+		// left to right
+		if m.board[i*3+0] != cellEmpty && m.board[i*3+0] == m.board[i*3+1] && m.board[i*3+0] == m.board[i*3+2] {
+			m.complete(m.board[0+1], fmt.Sprintf("%d%d%d", i*3+0, i*3+1, i*3+2))
+			return true
+		}
+	}
+
+	// top left to bottom right
+	if m.board[0] != cellEmpty && m.board[0] == m.board[4] && m.board[0] == m.board[8] {
+		m.complete(m.board[0+1], fmt.Sprintf("%d%d%d", 0, 4, 8))
+		return true
+	}
+
+	// top right to bottom left
+	if m.board[2] != cellEmpty && m.board[2] == m.board[4] && m.board[2] == m.board[6] {
+		m.complete(m.board[0+1], fmt.Sprintf("%d%d%d", 2, 4, 6))
+		return true
+	}
+
 	return false
+}
+
+func (m *Match) complete(state cellState, indices string) {
+	if state == cellCross {
+		m.clientCross.send("winner:" + indices)
+		m.clientCircle.send("loser:" + indices)
+	} else {
+		m.clientCircle.send("winner:" + indices)
+		m.clientCross.send("loser:" + indices)
+	}
 }
 
 func (m *Match) terminate() {
