@@ -26,6 +26,10 @@ type Match struct {
 
 	currentPlayerId string
 
+	gameComplete bool
+	againCross   bool
+	againCircle  bool
+
 	board board
 
 	server *Server
@@ -45,6 +49,28 @@ func (s *Server) NewMatch(clientCross, clientCircle *Client) *Match {
 	clientCircle.match = match
 
 	return match
+}
+
+func (m *Match) restart() {
+	m.gameComplete = false
+	m.againCross = false
+	m.againCircle = false
+	m.board = board{}
+	m.currentPlayerId = m.clientCross.id
+
+	m.sendBoard()
+
+	err := m.clientCross.send("your-turn")
+	if err != nil {
+		m.terminate()
+		return
+	}
+
+	err = m.clientCircle.send("their-turn")
+	if err != nil {
+		m.terminate()
+		return
+	}
 }
 
 func (m *Match) begin() {
@@ -76,6 +102,20 @@ func (m *Match) begin() {
 }
 
 func (m *Match) handleCommand(client *Client, command string) {
+	if m.gameComplete {
+		if command == "again" {
+			if client == m.clientCross {
+				m.againCross = true
+			} else {
+				m.againCircle = true
+			}
+			if m.againCross && m.againCircle {
+				m.restart()
+			}
+		}
+		return
+	}
+
 	if client.id != m.currentPlayerId {
 		fmt.Printf("Player %s tried to execute an action even though it is not their turn.", client.ip)
 		return
@@ -105,7 +145,8 @@ func (m *Match) handleCommand(client *Client, command string) {
 			m.board[index] = cellCircle
 		}
 
-		if !m.checkComplete() {
+		m.gameComplete = m.checkComplete()
+		if !m.gameComplete {
 			m.switchTurns()
 		}
 	}
