@@ -41,6 +41,8 @@ func (c *Client) handleConnection() {
 
 	if c.match != nil {
 		c.match.disconnect(c)
+	} else {
+		c.server.waitingClient = nil
 	}
 }
 

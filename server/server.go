@@ -47,16 +47,12 @@ func (s *Server) Listen(port int) {
 		go client.handleConnection()
 
 		if s.waitingClient != nil {
-			if s.waitingClient.send("ping") != nil {
-				s.waitingClient = nil
-			} else {
-				match := s.NewMatch(s.waitingClient, client)
-				s.matchesLock.Lock()
-				s.matches = append(s.matches)
-				s.matchesLock.Unlock()
-				s.waitingClient = nil
-				match.begin()
-			}
+			match := s.NewMatch(s.waitingClient, client)
+			s.matchesLock.Lock()
+			s.matches = append(s.matches)
+			s.matchesLock.Unlock()
+			s.waitingClient = nil
+			match.begin()
 		} else {
 			s.waitingClient = client
 		}
