@@ -5,6 +5,8 @@
 
 A simple TicTacToe TCP multiplayer server.
 
+Public instance: `julianh.de:7531`
+
 ## Features
 
 - Unlimited 1v1 matches in parallel
