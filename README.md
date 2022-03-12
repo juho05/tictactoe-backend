@@ -15,7 +15,8 @@ Public instance: `julianh.de:7531`
 
 ## Clients
 
-- [tictactoe-cli](https://github.com/Bananenpro/tictactoe-cli)
+- [CLI](https://github.com/Bananenpro/tictactoe-cli) by *Bananenpro*
+- [WPF](https://github.com/Zersaeger/Tic-Tac-Toe-Multiplayer-Frontend) by *Zersaeger*
 
 ## Commands
 
