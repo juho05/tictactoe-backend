@@ -3,7 +3,7 @@
 ![License](https://img.shields.io/github/license/Bananenpro/tictactoe-backend)
 ![Go version](https://img.shields.io/github/go-mod/go-version/Bananenpro/tictactoe-backend)
 
-A simple TicTacToe TCP multiplayer server.
+A TicTacToe TCP multiplayer server.
 
 Public instance: `julianh.de:7531`
 
