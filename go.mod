@@ -1,4 +1,4 @@
-module github.com/Bananenpro/tictactoe-backend
+module github.com/juho05/tictactoe-backend
 
 go 1.17
 

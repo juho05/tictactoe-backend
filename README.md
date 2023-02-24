@@ -1,11 +1,9 @@
 # TicTacToe multiplayer server
 
-![License](https://img.shields.io/github/license/Bananenpro/tictactoe-backend)
-![Go version](https://img.shields.io/github/go-mod/go-version/Bananenpro/tictactoe-backend)
+![License](https://img.shields.io/github/license/juho05/tictactoe-backend)
+![Go version](https://img.shields.io/github/go-mod/go-version/juho05/tictactoe-backend)
 
 A TicTacToe TCP multiplayer server.
-
-Public instance: `julianh.de:7531`
 
 ## Features
 
@@ -15,7 +13,7 @@ Public instance: `julianh.de:7531`
 
 ## Clients
 
-- [CLI](https://github.com/Bananenpro/tictactoe-cli) by *Bananenpro*
+- [CLI](https://github.com/juho05/tictactoe-cli) by *juho05*
 - [WPF](https://github.com/Zersaeger/Tic-Tac-Toe-Multiplayer-Frontend) by *Zersaeger*
 
 ## Commands
@@ -74,7 +72,7 @@ Public instance: `julianh.de:7531`
 ### Cloning the repo
 
 ```sh
-git clone https://github.com/Bananenpro/tictactoe-backend.git
+git clone https://github.com/juho05/tictactoe-backend.git
 cd tictactoe-backend
 ```
 

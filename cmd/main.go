@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Bananenpro/tictactoe-backend/server"
+	"github.com/juho05/tictactoe-backend/server"
 )
 
 const port = 7531
